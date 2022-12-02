@@ -8,9 +8,9 @@ class Player {
 		this.speed = 10
 		this.vx = 0
 		this.vy = 0
+		this.alive = 1
 		this.img = new Image()
-    
-    this.bullets = []
+		this.bullets = []
 		this.img.src = "/images/player.png"
 		this.isReady = false
 		this.img.onload = () => {
@@ -26,8 +26,8 @@ class Player {
 
 	draw() {
 		if (this.isReady) {
-			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-      this.bullets.forEach((bullet) => bullet.draw());
+			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			this.bullets.forEach((bullet) => bullet.draw())
 		}
 	}
 	move() {
@@ -62,11 +62,17 @@ class Player {
 			this.y = this.ctx.canvas.height - this.height
 		}
 
-    this.bullets.forEach((bullet) => bullet.move())
+		this.bullets.forEach((bullet) => bullet.move())
 	}
-
+	isColliding(obj) {
+		return (
+			this.x < obj.x + obj.width &&
+			this.x + this.width > obj.x &&
+			this.y < obj.y + obj.height &&
+			this.y + this.height > obj.y
+		)
+	}
 	onKeyEvent(event) {
-    
 		const status = event.type === "keydown"
 
 		if (event.keyCode === 37) {
@@ -79,9 +85,8 @@ class Player {
 			this.movements.down = status
 		}
 
-
 		if (event.keyCode === 32) {
-       this.bullets.push(new Bullet(this.ctx, this.x, this.y + 50))
+			this.bullets.push(new Bullet(this.ctx, this.x, this.y + 50))
 		}
 	}
 }

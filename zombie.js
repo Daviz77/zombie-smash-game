@@ -3,10 +3,9 @@ class Zombie {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
-		this.vy = 2
-		this.vx = 2
+		this.vy = 3
+		this.vx = 3
 		this.width = width
-		this.alive = true
 		this.img = new Image()
 		this.img.src = "./images/player.png"
 		this.isReady = false
@@ -17,7 +16,7 @@ class Zombie {
 	}
 
 	draw() {
-		if (this.isReady && this.alive) {
+		if (this.isReady) {
 			const diff = this.height + this.y - 900
 			if (diff > 0) {
 				this.y = 900 - this.height
@@ -27,19 +26,55 @@ class Zombie {
 		}
 	}
 
-	move(playerX, playerY) {
+	move(playerX, playerY, movements) {
+		Object.values(movements).every((value) => !value)
+
 		if (this.isReady) {
-			if (playerX < this.x) {
-				this.x -= this.vx
+			if (playerX <= this.x) {
+				const diffX = this.x - playerX
+
+				if (diffX < this.vx) {
+					this.x -= diffX
+				} else {
+					this.x -= this.vx
+				}
+
 			} else {
-				this.x += this.vx
+				const diffX = playerX - this.x
+
+				if (diffX < this.vx) {
+					this.x += diffX
+				} else {
+					this.x += this.vx
+				}
 			}
 
-			if (playerY < this.y) {
-				this.y -= this.vy
+			if (playerY <= this.y) {
+				const diffY = this.y - playerY
+
+				if (diffY < this.vy) {
+					this.y -= diffY
+				} else {
+					this.y -= this.vy
+				}
+
 			} else {
-				this.y += this.vy
+				const diffY = playerY - this.y
+				
+				if (diffY < this.vy) {
+					this.y += diffY
+				} else {
+					this.y += this.vy
+				}
 			}
 		}
+	}
+	isColliding(obj) {
+		return (
+			this.x < obj.x + obj.width &&
+			this.x + this.width > obj.x &&
+			this.y < obj.y + obj.height &&
+			this.y + this.height > obj.y
+		)
 	}
 }

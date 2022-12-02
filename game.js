@@ -18,7 +18,7 @@ class Game {
 			this.tick++
 			let zombiesCounter = 0
 
-			if (this.tick % 120 === 0 && zombiesCounter < 50) {
+			if (this.tick % 90 === 0 && zombiesCounter < 50) {
 				this.addZombie()
 				zombiesCounter++
 			}
@@ -26,6 +26,9 @@ class Game {
 		}, 1000 / 60)
 	}
 
+	clear() {
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+	}
 	draw() {
 		this.bg.draw()
 		this.player.draw()
@@ -37,31 +40,41 @@ class Game {
 	move() {
 		this.player.move()
 		this.zombies.forEach((zombie) => {
-			zombie.move(this.player.x, this.player.y)
+			zombie.move(this.player.x, this.player.y, this.player.movements)
 		})
 	}
 
 	addZombie() {
-		const randomWidth = Math.random() * (120 - 50) + 50
+		const randomWidth = Math.random() * (140 - 60) + 50
 		const randomY = Math.random() * (900 - 250) + 250
-		const axisX = 1500 - randomWidth
+		const axisX = 1500
 
 		this.zombies.push(new Zombie(this.ctx, axisX, randomY, randomWidth))
 	}
 
 	checkCollisions() {
+		this.zombies.forEach((zombie) => {
+			const playerDead = this.player.isColliding(zombie)
+
+			if (playerDead) {
+				alert('muerote')
+				clearInterval(this.intervalId)
+				document.location.reload()
+				//this.player.alive = !this.player.isColliding(zombie)
+				//console.log(this.player.alive = !this.player.isColliding(zombie))
+				
+			}
+		})
 		this.player.bullets.forEach((bullet) => {
 			this.zombies.forEach((zombie) => {
-				if (zombie.alive) {
-					zombie.alive = !bullet.isColliding(zombie)
+				const isColliding = bullet.isColliding(zombie);
+
+				if (isColliding) {
+					this.zombies.splice(this.zombies.indexOf(zombie), 1);
+					this.player.bullets.splice(this.player.bullets.indexOf(bullet), 1);
 				}
 			})
 		})
-	}
-
-	clear() {
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-		//this.zombies = this.zombies.filter(zombie => zombie.y < this.canvas.height);
 	}
 
 	onKeyEvent(event) {
