@@ -57,12 +57,8 @@ class Game {
 			const playerDead = this.player.isColliding(zombie)
 
 			if (playerDead) {
-				alert('muerote')
-				clearInterval(this.intervalId)
-				document.location.reload()
-				//this.player.alive = !this.player.isColliding(zombie)
-				//console.log(this.player.alive = !this.player.isColliding(zombie))
-				
+				this.gameOver()
+				clearInterval(this.intervalId);
 			}
 		})
 		this.player.bullets.forEach((bullet) => {
@@ -83,5 +79,15 @@ class Game {
 	}
 	onKeyEvent(event) {
 		this.player.onKeyEvent(event)
+	}
+
+	gameOver() {
+		clearInterval(this.intervalId);
+		this.ctx.fillStyle = "rgba(50, 50, 50, 0.7)";
+		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		this.ctx.fillStyle = 'red';
+		this.ctx.font = "100px Comic Sans";
+		this.ctx.textAlign = "center";
+		this.ctx.fillText("Game Over", this.canvas.width / 2, this.canvas.height / 2);
 	}
 }
