@@ -11,3 +11,9 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", (event) => {
 	game.onKeyEvent(event)
 })
+
+/*
+Document.addEventListener("MouseEvente.CLICK", (event => {
+	game.onKeyEvent(event)
+}))
+*/

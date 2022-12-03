@@ -12,7 +12,8 @@ class Player {
 		this.img = new Image()
 		this.bullets = []
 		this.img.src = "/images/player.png"
-		this.isReady = false
+		this.isReady = false;
+		this.canShoot = true;
 		this.img.onload = () => {
 			this.isReady = true
 		}
@@ -26,6 +27,10 @@ class Player {
 
 	draw() {
 		if (this.isReady) {
+			const diff = this.height + this.y - 900
+			if (diff > 0) {
+				this.y = 900 - this.height
+			}
 			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
 			this.bullets.forEach((bullet) => bullet.draw())
 		}
@@ -75,18 +80,22 @@ class Player {
 	onKeyEvent(event) {
 		const status = event.type === "keydown"
 
-		if (event.keyCode === 37) {
+		if (event.keyCode === 65) {
 			this.movements.left = status
-		} else if (event.keyCode === 39) {
+		} else if (event.keyCode === 68) {
 			this.movements.right = status
-		} else if (event.keyCode === 38) {
+		} else if (event.keyCode === 87) {
 			this.movements.up = status
-		} else if (event.keyCode === 40) {
+		} else if (event.keyCode === 83) {
 			this.movements.down = status
 		}
 
-		if (event.keyCode === 32) {
+		if (event.keyCode === 32 && this.canShoot) {
 			this.bullets.push(new Bullet(this.ctx, this.x, this.y + 50))
+			this.canShoot = false;
+			setTimeout(() => {
+				this.canShoot = true
+			}, 300)
 		}
 	}
 }

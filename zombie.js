@@ -1,11 +1,12 @@
 class Zombie {
-	constructor(ctx, x, y, width) {
+	constructor(ctx, x, y, width, lifes, speed) {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
-		this.vy = 3
-		this.vx = 3
+		this.vy = speed
+		this.vx = speed
 		this.width = width
+		this.lifes = lifes
 		this.img = new Image()
 		this.img.src = "./images/player.png"
 		this.isReady = false

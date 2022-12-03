@@ -4,7 +4,7 @@ class Bullet {
 		this.x = x
 		this.y = y
 		this.height = 10
-		this.width = 30
+		this.width = 20
 
 		this.img = new Image()
 		this.img.src = "./images/PngItem_709207.png"
@@ -13,7 +13,7 @@ class Bullet {
 			this.isReady = true
 		}
 
-		this.speed = 5
+		this.speed = 3
 	}
 
 	draw() {
