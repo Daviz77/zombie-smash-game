@@ -3,9 +3,8 @@ class Game {
 		this.canvas = document.getElementById(canvasId)
 		this.ctx = this.canvas.getContext("2d")
 		this.bg = new Background(this.ctx)
-		this.player = new Player(this.ctx, 100, 100)
-		this.boss = new Boss(this.ctx, 1450, 355, 200, 5, 4)
-		//this.obstacle = new Obstacle(this.ctx, 200, 200)
+		this.player = new Player(this.ctx, 725, 355)
+		this.boss = new Boss(this.ctx, 1450, 355, 150, 100, 4)
 		this.zombies = []
 		this.bossAlive = false
 		this.tick = 0
@@ -67,15 +66,31 @@ class Game {
 	}
 
 	addZombie() {
-		const randomWidth = Math.random() * (140 - 50) + 50
-		const isSuper = randomWidth >= 100
-		const speed = isSuper ? 5 : 3
-		const lifes = isSuper ? 2 : 1
-		const randomY = Math.random() * (710 - 250) + 250
-		const axisX = 1450
+		const randomWidth = Math.random() * (80 - 30) + 30
+		const isSuper = randomWidth >= 60
+		const speed = isSuper ? 3 : 6
+		const lifes = isSuper ? 3 : 1
+		const bool = Math.floor(Math.random() * 4)
+
+		let randomX
+		let randomY
+
+		if (bool === 0) {
+			randomX = this.canvas.width
+			randomY = Math.random() * this.canvas.height
+		} else if (bool === 1) {
+			randomX = Math.random() * this.canvas.width
+			randomY = this.canvas.height
+		} else if (bool === 2) {
+			randomX = 0
+			randomY = Math.random() * this.canvas.height
+		} else {
+			randomX = Math.random() * this.canvas.width
+			randomY = 0
+		}
 
 		this.zombies.push(
-			new Zombie(this.ctx, axisX, randomY, randomWidth, lifes, speed)
+			new Zombie(this.ctx, randomX, randomY, randomWidth, lifes, speed)
 		)
 	}
 
@@ -99,14 +114,16 @@ class Game {
 		}
 
 		this.player.bullets.forEach((bullet) => {
-			const iscollidingBoss = bullet.isColliding(this.boss)
+			if (this.bossAlive) {
+				const iscollidingBoss = bullet.isColliding(this.boss)
 
-			if (iscollidingBoss) {
-				this.boss.lifes -= 1
-				if (this.boss.lifes === 0) {
-					this.gameWin()
+				if (iscollidingBoss) {
+					this.boss.lifes -= 1
+					if (this.boss.lifes === 0) {
+						this.youWin()
+					}
+					this.player.bullets.splice(this.player.bullets.indexOf(bullet), 1)
 				}
-				this.player.bullets.splice(this.player.bullets.indexOf(bullet), 1)
 			}
 
 			this.zombies.forEach((zombie) => {
@@ -135,7 +152,6 @@ class Game {
 
 	gameOver() {
 		clearInterval(this.intervalId)
-		this.started = false
 		this.ctx.fillStyle = "rgba(50, 50, 50, 0.7)"
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 		this.ctx.fillStyle = "red"
@@ -149,9 +165,8 @@ class Game {
 		setTimeout(() => location.reload(), 2000)
 	}
 
-	gameWin() {
+	youWin() {
 		clearInterval(this.intervalId)
-		this.started = false
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 		this.ctx.fillStyle = "white"
 		this.ctx.font = "80px Comic Sans"

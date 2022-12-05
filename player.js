@@ -3,8 +3,8 @@ class Player {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
-		this.width = 150
-		this.height = 150
+		this.width = 60
+		this.height = 60
 		this.speed = 10
 		this.vx = 0
 		this.vy = 0
@@ -97,7 +97,7 @@ class Player {
 		const clickedX = event.clientX - rect.left
 		const clickedY = event.clientY - rect.top
 
-		const normalizedY = this.y + 50
+		const normalizedY = this.y + 18
 
 		const diffX = clickedX - this.x
 		const diffY = clickedY - normalizedY 
@@ -106,16 +106,8 @@ class Player {
 		let vfx = Math.cos(tanNum)
 		let vfy = Math.sin(tanNum)
 
-
-		if (this.canShoot) {
-			this.bullets.push(
-				new Bullet(this.ctx, this.x + this.width, normalizedY, vfx, vfy)
-			)
-
-			this.canShoot = false
-			setTimeout(() => {
-				this.canShoot = true
-			}, 300)
-		}
+		this.bullets.push(
+			new Bullet(this.ctx, this.x + this.width, normalizedY, vfx, vfy)
+		)
 	}
 }

@@ -8,7 +8,7 @@ class Boss {
 		this.width = width
 		this.lifes = lifes
 		this.img = new Image()
-		this.img.src = "./images/player.png"
+		this.img.src = "./images/HD_Zomboss.webp"
 		this.isReady = false
 		this.img.onload = () => {
 			this.isReady = true
@@ -18,6 +18,10 @@ class Boss {
 
 	draw() {
 		if (this.isReady) {
+      const diff = this.height + this.y - 710
+			if (diff > 0) {
+				this.y = 710 - this.height
+			}
 			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
 		}
 	}

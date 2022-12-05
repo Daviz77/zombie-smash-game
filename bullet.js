@@ -3,8 +3,8 @@ class Bullet {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
-		this.height = 10
-		this.width = 20
+		this.height = 5
+		this.width = 5
 
 		this.img = new Image()
 		this.img.src = "./images/PngItem_709207.png"
@@ -13,8 +13,8 @@ class Bullet {
 			this.isReady = true
 		}
 
-		this.xSpeed = 7 * xSpeed;
-		this.ySpeed = 7 * ySpeed;
+		this.xSpeed = 8 * xSpeed;
+		this.ySpeed = 8 * ySpeed;
 	}
 
 	draw() {
