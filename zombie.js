@@ -70,6 +70,7 @@ class Zombie {
 			}
 		}
 	}
+	
 	isColliding(obj) {
 		return (
 			this.x < obj.x + obj.width &&
