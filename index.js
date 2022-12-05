@@ -4,7 +4,7 @@ const bgd = document.getElementById('start')
 const secondTry = document.getElementById('try-again')
 
 document.addEventListener("keydown", (event) => {
-	if (event.key === 'Enter') {
+	if (event.key === 'Enter' && !game.started) {
     title.classList.add("hidden");
     bgd.classList.add("hidden");
 		game.start()

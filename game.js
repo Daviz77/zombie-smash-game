@@ -8,9 +8,11 @@ class Game {
 		this.zombies = []
 		this.tick = 0
 		this.intervalId = null
+		this.started = false
 	}
 
 	start() {
+		this.started = true
 		let zombiesCounter = 0
 
 		this.intervalId = setInterval(() => {
@@ -72,6 +74,7 @@ class Game {
 
 				if (isColliding) {
 					zombie.lifes -= 1
+
 					if (zombie.lifes === 0) {
 						this.zombies.splice(this.zombies.indexOf(zombie), 1)
 					}
@@ -92,6 +95,7 @@ class Game {
 
 	gameOver() {
 		clearInterval(this.intervalId)
+		this.started = false
 		this.ctx.fillStyle = "rgba(50, 50, 50, 0.7)"
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 		this.ctx.fillStyle = "red"
@@ -102,5 +106,6 @@ class Game {
 			this.canvas.width / 2,
 			this.canvas.height / 2
 		)
+		setTimeout(() => location.reload(), 3000)
 	}
 }
