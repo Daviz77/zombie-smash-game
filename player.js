@@ -12,8 +12,8 @@ class Player {
 		this.img = new Image()
 		this.bullets = []
 		this.img.src = "/images/player.png"
-		this.isReady = false;
-		this.canShoot = true;
+		this.isReady = false
+		this.canShoot = true
 		this.img.onload = () => {
 			this.isReady = true
 		}
@@ -92,12 +92,27 @@ class Player {
 	}
 
 	onClickEvent(event) {
-		if (this.canShoot) {
-			const { x, y } = event;
-			const speed = 7;
+		const rect = canvas.getBoundingClientRect()
 
-			this.bullets.push(new Bullet(this.ctx, this.x + 90, this.y + 50, speed, speed * ((y - (this.y + 50)) / (x - (this.x + 90)) )))
-			this.canShoot = false;
+		const clickedX = event.clientX - rect.left
+		const clickedY = event.clientY - rect.top
+
+		const normalizedY = this.y + 50
+
+		const diffX = clickedX - this.x
+		const diffY = clickedY - normalizedY 
+		const tanNum = Math.atan2(diffY, diffX)
+
+		let vfx = Math.cos(tanNum)
+		let vfy = Math.sin(tanNum)
+
+
+		if (this.canShoot) {
+			this.bullets.push(
+				new Bullet(this.ctx, this.x + this.width, normalizedY, vfx, vfy)
+			)
+
+			this.canShoot = false
 			setTimeout(() => {
 				this.canShoot = true
 			}, 300)

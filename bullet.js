@@ -13,13 +13,15 @@ class Bullet {
 			this.isReady = true
 		}
 
-		this.xSpeed = xSpeed;
-		this.ySpeed = ySpeed;
+		this.xSpeed = 7 * xSpeed;
+		this.ySpeed = 7 * ySpeed;
 	}
 
 	draw() {
 		if (this.isReady) {
+			//this.ctx.beginPath();
 			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			//this.ctx.stroke()
 		}
 	}
 

@@ -1,18 +1,14 @@
 const game = new Game("canvas")
-const startBtn = document.getElementById('start-btn');
 const title = document.getElementById('title');
 const bgd = document.getElementById('start')
 const secondTry = document.getElementById('try-again')
 
-startBtn.addEventListener('click', () => {
-    startBtn.classList.add("hidden");
+document.addEventListener("keydown", (event) => {
+	if (event.key === 'Enter') {
     title.classList.add("hidden");
     bgd.classList.add("hidden");
-		//secondTry.classList.add(!"hidden")
-    game.start();
-});
-
-document.addEventListener("keydown", (event) => {
+		game.start()
+	}
 	game.onKeyEvent(event)
 })
 
@@ -21,6 +17,7 @@ document.addEventListener("keyup", (event) => {
 })
 
 document.addEventListener('click', (event) => {
+	event.preventDefault()
 	game.onClickEvent(event)
 })
 
