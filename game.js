@@ -48,11 +48,11 @@ class Game {
 	addZombie() {
 		
 		const randomWidth = Math.random() * (140 - 50) + 50
-		const isSuper = randomWidth <= 100 
-		const speed = isSuper ? 4 : 3
+		const isSuper = randomWidth >= 100 
+		const speed = isSuper ? 6 : 4
 		const lifes = isSuper ? 2 : 1
-		const randomY = Math.random() * (900 - 250) + 250
-		const axisX = 1500
+		const randomY = Math.random() * (710 - 250) + 250
+		const axisX = 1450
 
 		this.zombies.push(new Zombie(this.ctx, axisX, randomY, randomWidth, lifes, speed))
 	}
@@ -71,7 +71,10 @@ class Game {
 				const isColliding = bullet.isColliding(zombie)
 
 				if (isColliding) {
-					this.zombies.splice(this.zombies.indexOf(zombie), 1)
+					zombie.lifes -= 1
+					if (zombie.lifes === 0) {
+						this.zombies.splice(this.zombies.indexOf(zombie), 1)
+					}
 					this.player.bullets.splice(this.player.bullets.indexOf(bullet), 1)
 				}
 			})

@@ -9,7 +9,7 @@
 
 #start-game {
 	margin-top: 750px;
-	margin-bottom: 100px;
+	margin-bottom: 250px;
 	font-size: 60px;
 	color: rgb(247, 4, 4);
 	background-color: transparent;
@@ -23,8 +23,8 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	width: 1500px;
-	height: 900px;
+	width: 1450px;
+	height: 710px;
 	background-image: url(./images/inciobg.webp);
 	background-repeat: no-repeat;
 	background-size: auto;

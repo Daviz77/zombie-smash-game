@@ -27,9 +27,9 @@ class Player {
 
 	draw() {
 		if (this.isReady) {
-			const diff = this.height + this.y - 900
+			const diff = this.height + this.y - 710
 			if (diff > 0) {
-				this.y = 900 - this.height
+				this.y = 710 - this.height
 			}
 			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
 			this.bullets.forEach((bullet) => bullet.draw())
