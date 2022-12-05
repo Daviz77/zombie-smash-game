@@ -49,7 +49,7 @@ class Game {
 		
 		const randomWidth = Math.random() * (140 - 50) + 50
 		const isSuper = randomWidth <= 100 
-		const speed = isSuper ? 5 : 3
+		const speed = isSuper ? 4 : 3
 		const lifes = isSuper ? 2 : 1
 		const randomY = Math.random() * (900 - 250) + 250
 		const axisX = 1500
@@ -82,8 +82,9 @@ class Game {
 		event.preventDefault()
 		this.player.onKeyEvent(event)
 	}
-	onKeyEvent(event) {
-		this.player.onKeyEvent(event)
+
+	onClickEvent(event) {
+		this.player.onClickEvent(event)
 	}
 
 	gameOver() {

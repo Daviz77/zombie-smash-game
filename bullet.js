@@ -1,5 +1,5 @@
 class Bullet {
-	constructor(ctx, x, y) {
+	constructor(ctx, x, y, xSpeed, ySpeed) {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
@@ -13,7 +13,8 @@ class Bullet {
 			this.isReady = true
 		}
 
-		this.speed = 3
+		this.xSpeed = xSpeed;
+		this.ySpeed = ySpeed;
 	}
 
 	draw() {
@@ -23,7 +24,8 @@ class Bullet {
 	}
 
 	move() {
-		this.x += this.speed
+		this.x += this.xSpeed;
+		this.y += this.ySpeed;
 	}
 
 	isColliding(obj) {

@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Microbe&display=swap');
+
+#start {
+	display: flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content: center;
+}
+
+#start-btn {
+	margin-top: 750px;
+	margin-bottom: 100px;
+	font-size: 60px;
+	color: rgb(247, 4, 4);
+	background-color: transparent;
+	border-style: hidden;
+}
+.hidden {
+	display: none !important;
+}
+#start {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 1500px;
+	height: 900px;
+	background-image: url(./images/inciobg.webp);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-size: cover;
+}
+#canvas {
+	position:absolute;
+	top: 0px;
+	z-index: -1;
+}
+#title {
+  position: absolute;
+  top: 0;
+  font-family: 'Rubik Microbe', cursive;
+  font-size: 120px;
+  color: rgb(131, 54, 58);
+}

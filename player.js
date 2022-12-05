@@ -89,9 +89,14 @@ class Player {
 		} else if (event.keyCode === 83) {
 			this.movements.down = status
 		}
+	}
 
-		if (event.keyCode === 32 && this.canShoot) {
-			this.bullets.push(new Bullet(this.ctx, this.x, this.y + 50))
+	onClickEvent(event) {
+		if (this.canShoot) {
+			const { x, y } = event;
+			const speed = 7;
+
+			this.bullets.push(new Bullet(this.ctx, this.x + 90, this.y + 50, speed, speed * ((y - (this.y + 50)) / (x - (this.x + 90)) )))
 			this.canShoot = false;
 			setTimeout(() => {
 				this.canShoot = true
