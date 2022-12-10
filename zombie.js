@@ -39,7 +39,6 @@ class Zombie {
 				} else {
 					this.x -= this.vx
 				}
-
 			} else {
 				const diffX = playerX - this.x
 
@@ -58,10 +57,9 @@ class Zombie {
 				} else {
 					this.y -= this.vy
 				}
-
 			} else {
 				const diffY = playerY - this.y
-				
+
 				if (diffY < this.vy) {
 					this.y += diffY
 				} else {
@@ -70,7 +68,7 @@ class Zombie {
 			}
 		}
 	}
-	
+
 	isColliding(obj) {
 		return (
 			this.x < obj.x + obj.width &&

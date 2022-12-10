@@ -113,7 +113,6 @@ class Game {
 				}
 			}
 		})
-		
 
 		this.player.bullets.forEach((bullet) => {
 			if (this.bossAlive) {

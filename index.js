@@ -1,11 +1,11 @@
 const game = new Game("canvas")
-const title = document.getElementById('title');
-const bgd = document.getElementById('start')
+const title = document.getElementById("title")
+const bgd = document.getElementById("start")
 
 document.addEventListener("keydown", (event) => {
-	if (event.key === 'Enter' && !game.started) {
-    title.classList.add("hidden");
-    bgd.classList.add("hidden");
+	if (event.key === "Enter" && !game.started) {
+		title.classList.add("hidden")
+		bgd.classList.add("hidden")
 		game.start()
 	}
 	game.onKeyEvent(event)
@@ -15,7 +15,7 @@ document.addEventListener("keyup", (event) => {
 	game.onKeyEvent(event)
 })
 
-document.addEventListener('click', (event) => {
+document.addEventListener("click", (event) => {
 	event.preventDefault()
 	game.onClickEvent(event)
 })
@@ -31,5 +31,5 @@ Document.addEventListener("MouseEvente.CLICK", (event => {
 }))
 */
 
-   // startSound.play();
-    // startSound.volume = 0.09;
+// startSound.play();
+// startSound.volume = 0.09;

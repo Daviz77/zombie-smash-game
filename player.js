@@ -100,7 +100,7 @@ class Player {
 		const normalizedY = this.y + 18
 
 		const diffX = clickedX - this.x
-		const diffY = clickedY - normalizedY 
+		const diffY = clickedY - normalizedY
 		const tanNum = Math.atan2(diffY, diffX)
 
 		let vfx = Math.cos(tanNum)

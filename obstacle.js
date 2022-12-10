@@ -1,5 +1,5 @@
 class Obstacle {
-  constructor(ctx, x, y) {
+	constructor(ctx, x, y) {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
@@ -14,13 +14,7 @@ class Obstacle {
 	}
 	draw() {
 		if (this.isReady) {
-			this.ctx.drawImage(
-				this.img,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			)
+			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
 		}
 	}
 }

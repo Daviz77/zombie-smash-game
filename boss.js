@@ -10,8 +10,6 @@ class Boss {
 		this.bullets = []
 		this.img = new Image()
 		this.img.src = "./images/HD_Zomboss.webp"
-		this.bullets.img = new Image()
-		this.bullets.src = "./images/moco.png"
 		this.isReady = false
 		this.img.onload = () => {
 			this.isReady = true
@@ -21,16 +19,14 @@ class Boss {
 
 	draw() {
 		if (this.isReady) {
-			const xSpeed = 6
-			const ySpeed = 6
 			const diff = this.height + this.y - 710
 			if (diff > 0) {
 				this.y = 710 - this.height
 			}
 			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
-			}
-			this.bullets.forEach((bullet) => bullet.draw())
 		}
+		this.bullets.forEach((bullet) => bullet.draw())
+	}
 
 	move(playerX, playerY) {
 		if (this.isReady) {
@@ -72,7 +68,7 @@ class Boss {
 		}
 
 		this.bullets.forEach((bullet) => bullet.move())
-		if (game.tick % 20 === 0){
+		if (game.tick % 30 === 0) {
 			this.isShooting(playerX, playerY)
 		}
 	}
@@ -94,15 +90,15 @@ class Boss {
 		const normalizedY = this.y + 75
 		const normalizedX = this.x - 100
 
-		const diffX = playerX - bossX 
-		const diffY = playerY - bossy  
+		const diffX = playerX - bossX
+		const diffY = playerY - bossy
 		const tanNum = Math.atan2(diffY, diffX)
 
 		let vfx = Math.cos(tanNum)
 		let vfy = Math.sin(tanNum)
 
 		this.bullets.push(
-			new Bullet(this.ctx, normalizedX + this.width, normalizedY, vfx, vfy)
+			new BulletBoss(this.ctx, normalizedX + this.width, normalizedY, vfx, vfy)
 		)
 	}
 }
