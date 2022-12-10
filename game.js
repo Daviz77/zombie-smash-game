@@ -4,7 +4,7 @@ class Game {
 		this.ctx = this.canvas.getContext("2d")
 		this.bg = new Background(this.ctx)
 		this.player = new Player(this.ctx, 725, 355)
-		this.boss = new Boss(this.ctx, 1450, 355, 150, 50, 4)
+		this.boss = new Boss(this.ctx, 1470, 355, 150, 50, 4)
 		this.zombies = []
 		this.bossAlive = false
 		this.tick = 0
@@ -14,7 +14,7 @@ class Game {
 
 	start() {
 		this.started = true
-		const zombiesTotal = 0
+		const zombiesTotal = 50
 		let zombiesCounter = 0
 
 		this.intervalId = setInterval(() => {
@@ -68,7 +68,7 @@ class Game {
 	addZombie() {
 		const randomWidth = Math.random() * (80 - 30) + 30
 		const isSuper = randomWidth >= 60
-		const speed = isSuper ? 3 : 6
+		const speed = isSuper ? 3 : 5
 		const lifes = isSuper ? 3 : 1
 		const bool = Math.floor(Math.random() * 4)
 

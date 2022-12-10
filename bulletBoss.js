@@ -12,8 +12,8 @@ class BulletBoss {
 			this.isReady = true
 		}
 
-		this.xSpeed = 8 * xSpeed
-		this.ySpeed = 8 * ySpeed
+		this.xSpeed = 6 * xSpeed
+		this.ySpeed = 6 * ySpeed
 	}
 
 	draw() {
