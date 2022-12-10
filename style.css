@@ -8,9 +8,10 @@
 }
 
 #start-game {
+	position: absolute;
 	margin-top: 750px;
-	margin-bottom: 250px;
-	font-size: 60px;
+	margin-bottom: 200px;
+	font-size: 40px;
 	color: rgb(247, 4, 4);
 	background-color: transparent;
 	border-style: hidden;
@@ -42,3 +43,14 @@
   font-size: 120px;
   color: rgb(131, 54, 58);
 }
+
+/*#leyenda{
+	font-size: 30px;
+	color:rgb(54, 28, 36)
+}
+
+#shoot {
+	font-size: 30px;
+	color:rgb(54, 28, 36)
+}
+*/

@@ -6,7 +6,7 @@ class Background {
     this.width = this.ctx.canvas.width
 		this.height = this.ctx.canvas.height
 		this.img = new Image()
-		this.img.src = "/images/zombie_game_background_by_biondic2016_d4uxtyd-fullview.png"
+		this.img.src = "./images/cemetary.jpg"
 		this.isReady = false
 		this.img.onload = () => {
 			this.isReady = true

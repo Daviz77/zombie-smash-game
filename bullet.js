@@ -5,7 +5,6 @@ class Bullet {
 		this.y = y
 		this.height = 7
 		this.width = 7
-
 		this.img = new Image()
 		this.img.src = "./images/PngItem_709207.png"
 		this.isReady = false

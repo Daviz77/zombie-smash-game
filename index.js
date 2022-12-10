@@ -1,7 +1,6 @@
 const game = new Game("canvas")
 const title = document.getElementById('title');
 const bgd = document.getElementById('start')
-const secondTry = document.getElementById('try-again')
 
 document.addEventListener("keydown", (event) => {
 	if (event.key === 'Enter' && !game.started) {

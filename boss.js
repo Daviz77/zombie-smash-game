@@ -33,7 +33,6 @@ class Boss {
 		}
 
 	move(playerX, playerY) {
-		console.log(this.x, this.y)
 		if (this.isReady) {
 			if (playerX <= this.x) {
 				const diffX = this.x - playerX
@@ -73,7 +72,7 @@ class Boss {
 		}
 
 		this.bullets.forEach((bullet) => bullet.move())
-		if (game.tick % 60 === 0){
+		if (game.tick % 20 === 0){
 			this.isShooting(playerX, playerY)
 		}
 	}
@@ -89,14 +88,14 @@ class Boss {
 	isShooting(playerX, playerY) {
 		const rect = canvas.getBoundingClientRect()
 
-		const bossX = playerX - rect.left
-		const bossy = playerY - rect.top
+		const bossX = this.x - rect.left
+		const bossy = this.y - rect.top
 
 		const normalizedY = this.y + 75
 		const normalizedX = this.x - 100
 
-		const diffX = bossX - playerX
-		const diffY = bossy - playerY
+		const diffX = playerX - bossX 
+		const diffY = playerY - bossy  
 		const tanNum = Math.atan2(diffY, diffX)
 
 		let vfx = Math.cos(tanNum)
