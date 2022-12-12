@@ -11,12 +11,19 @@ class Player {
 		this.alive = 1
 		this.img = new Image()
 		this.bullets = []
-		this.img.src = "/images/player.png"
+		this.img.src = "/images/zombie.png"
 		this.isReady = false
+		this.horizontalFrames = 3
+		this.verticalFrames = 1
+		this.xFrame = 0
+		this.yFrame = 0
+		this.tick = 0
+		this.isMoving = false;
 		this.canShoot = true
 		this.img.onload = () => {
 			this.isReady = true
 		}
+		
 		this.movements = {
 			left: false,
 			right: false,
@@ -31,8 +38,19 @@ class Player {
 			if (diff > 0) {
 				this.y = 710 - this.height
 			}
-			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			this.ctx.drawImage(
+				this.img,
+				this.img.width / this.horizontalFrames * this.xFrame,
+				this.img.height / this.verticalFrames * this.yFrame,
+				this.img.width / this.horizontalFrames,
+				this.img.height / this.verticalFrames,
+				this.x,
+				this.y,
+				this.width,
+				this.height
+			)
 			this.bullets.forEach((bullet) => bullet.draw())
+			this.tick++;
 		}
 	}
 	move() {
@@ -68,7 +86,26 @@ class Player {
 		}
 
 		this.bullets.forEach((bullet) => bullet.move())
+
+		if (this.isMoving) {
+			this.yFrame = 0;
+
+			if (this.tick % 10 === 0) {
+        this.xFrame += 1;
+
+        if (this.xFrame > this.horizontalFrames - 1) {
+          this.xFrame = 0;
+        }
+      }
+		}
+
+		if (!this.isMoving) {
+      this.yFrame = 0;
+      this.xFrame = 0;
+    }
 	}
+
+
 	isColliding(obj) {
 		return (
 			this.x < obj.x + obj.width &&
@@ -82,12 +119,20 @@ class Player {
 
 		if (event.keyCode === 65) {
 			this.movements.left = status
+			this.isMoving = true
 		} else if (event.keyCode === 68) {
+			this.isMoving = true
 			this.movements.right = status
 		} else if (event.keyCode === 87) {
+			this.isMoving = true
 			this.movements.up = status
 		} else if (event.keyCode === 83) {
+			this.isMoving = true
 			this.movements.down = status
+		}
+
+		if (event.type === "keyup") {
+			this.isMoving = false;
 		}
 	}
 

@@ -86,7 +86,7 @@ class Boss {
 	if (this.tick % 10 === 0) {
 				this.xFrame += 1;
 
-				if (this.xFrame > 2) {
+				if (this.xFrame > this.horizontalFrames - 1) {
 					this.xFrame = 0;
 				}
 			}
