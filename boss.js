@@ -9,8 +9,13 @@ class Boss {
 		this.lifes = lifes
 		this.bullets = []
 		this.img = new Image()
-		this.img.src = "./images/HD_Zomboss.webp"
+		this.img.src = "./images/zombie.png"
 		this.isReady = false
+		this.horizontalFrames = 3
+		this.verticalFrames = 1
+		this.xFrame = 0
+		this.yFrame = 0
+		this.tick = 0
 		this.img.onload = () => {
 			this.isReady = true
 			this.height = (this.width * this.img.height) / this.img.width
@@ -23,7 +28,19 @@ class Boss {
 			if (diff > 0) {
 				this.y = 710 - this.height
 			}
-			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			this.ctx.drawImage(
+				this.img,
+				this.img.width / this.horizontalFrames * this.xFrame,
+				this.img.height / this.verticalFrames * this.yFrame,
+				this.img.width / this.horizontalFrames,
+				this.img.height / this.verticalFrames,
+				this.x,
+				this.y,
+				this.width,
+				this.height
+			)
+
+			this.tick++
 		}
 		this.bullets.forEach((bullet) => bullet.draw())
 	}
@@ -65,10 +82,20 @@ class Boss {
 					this.y += this.vy
 				}
 			}
+
+	if (this.tick % 10 === 0) {
+				this.xFrame += 1;
+
+				if (this.xFrame > 2) {
+					this.xFrame = 0;
+				}
+			}
+			
+	
 		}
 
 		this.bullets.forEach((bullet) => bullet.move())
-		if (game.tick % 30 === 0) {
+		if (game.tick % 60 === 0) {
 			this.isShooting(playerX, playerY)
 		}
 	}

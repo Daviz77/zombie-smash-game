@@ -8,8 +8,13 @@ class Zombie {
 		this.width = width
 		this.lifes = lifes
 		this.img = new Image()
-		this.img.src = "./images/player.png"
+		this.img.src = "./images/zombie.png"
 		this.isReady = false
+		this.horizontalFrames = 3
+		this.verticalFrames = 1
+		this.xFrame = 0
+		this.yFrame = 0
+		this.tick = 0
 		this.img.onload = () => {
 			this.isReady = true
 			this.height = (this.width * this.img.height) / this.img.width
@@ -23,7 +28,19 @@ class Zombie {
 				this.y = 710 - this.height
 			}
 
-			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			this.ctx.drawImage(
+				this.img,
+				this.img.width / this.horizontalFrames * this.xFrame,
+				this.img.height / this.verticalFrames * this.yFrame,
+				this.img.width / this.horizontalFrames,
+				this.img.height / this.verticalFrames,
+				this.x,
+				this.y,
+				this.width,
+				this.height
+			)
+
+			this.tick++
 		}
 	}
 
@@ -64,6 +81,14 @@ class Zombie {
 					this.y += diffY
 				} else {
 					this.y += this.vy
+				}
+			}
+
+			if (this.tick % 10 === 0) {
+				this.xFrame += 1;
+
+				if (this.xFrame > 2) {
+					this.xFrame = 0;
 				}
 			}
 		}
