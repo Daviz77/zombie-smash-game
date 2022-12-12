@@ -30,8 +30,8 @@ class Boss {
 			}
 			this.ctx.drawImage(
 				this.img,
-				this.img.width / this.horizontalFrames * this.xFrame,
-				this.img.height / this.verticalFrames * this.yFrame,
+				(this.img.width / this.horizontalFrames) * this.xFrame,
+				(this.img.height / this.verticalFrames) * this.yFrame,
 				this.img.width / this.horizontalFrames,
 				this.img.height / this.verticalFrames,
 				this.x,
@@ -83,15 +83,13 @@ class Boss {
 				}
 			}
 
-	if (this.tick % 10 === 0) {
-				this.xFrame += 1;
+			if (this.tick % 10 === 0) {
+				this.xFrame += 1
 
 				if (this.xFrame > this.horizontalFrames - 1) {
-					this.xFrame = 0;
+					this.xFrame = 0
 				}
 			}
-			
-	
 		}
 
 		this.bullets.forEach((bullet) => bullet.move())
