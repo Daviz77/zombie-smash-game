@@ -5,7 +5,7 @@ class Player {
 		this.y = y
 		this.width = 60
 		this.height = 60
-		this.speed = 10
+		this.speed = 12
 		this.vx = 0
 		this.vy = 0
 		this.alive = 1
@@ -142,17 +142,22 @@ class Player {
 		const clickedX = event.clientX - rect.left
 		const clickedY = event.clientY - rect.top
 
-		const normalizedY = this.y + 18
+		const normalizedX = this.x + this.width;
+		const normalizedY = this.y + 18;
 
-		const diffX = clickedX - this.x
-		const diffY = clickedY - normalizedY
-		const tanNum = Math.atan2(diffY, diffX)
+    function getAxisSpeeds(x1, y1, x2, y2, speed) {
+      const distance = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+      const xSpeed = (x2 - x1) / (distance * speed);
+      const ySpeed = (y2 - y1) / (distance * speed);
+      return { xSpeed, ySpeed };
+    }
 
-		let vfx = Math.cos(tanNum)
-		let vfy = Math.sin(tanNum)
+    const bulletSpeed = 1
+
+		const { xSpeed, ySpeed } = getAxisSpeeds(normalizedX, normalizedY, clickedX, clickedY, bulletSpeed);
 
 		this.bullets.push(
-			new Bullet(this.ctx, this.x + this.width, normalizedY, vfx, vfy)
-		)
+			new Bullet(this.ctx, normalizedX, normalizedY, xSpeed, ySpeed)
+		);
 	}
 }
