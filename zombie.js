@@ -19,6 +19,9 @@ class Zombie {
 			this.isReady = true
 			this.height = (this.width * this.img.height) / this.img.width
 		}
+		this.imgInverse = new Image ()
+		this.imgInverse.src = "./images/ZombieInverso.png"
+		this.leftDirection = true
 	}
 
 	draw() {
@@ -27,19 +30,33 @@ class Zombie {
 			if (diff > 0) {
 				this.y = 710 - this.height
 			}
-
-			this.ctx.drawImage(
-				this.img,
-				(this.img.width / this.horizontalFrames) * this.xFrame,
-				(this.img.height / this.verticalFrames) * this.yFrame,
-				this.img.width / this.horizontalFrames,
-				this.img.height / this.verticalFrames,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			)
-
+			console.log(this.vx)
+			if (this.leftDirection) {
+				this.ctx.drawImage(
+					this.imgInverse,
+					(this.img.width / this.horizontalFrames) * this.xFrame,
+					(this.img.height / this.verticalFrames) * this.yFrame,
+					this.img.width / this.horizontalFrames,
+					this.img.height / this.verticalFrames,
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				)
+			} else {
+				this.ctx.drawImage(
+					this.img,
+					(this.img.width / this.horizontalFrames) * this.xFrame,
+					(this.img.height / this.verticalFrames) * this.yFrame,
+					this.img.width / this.horizontalFrames,
+					this.img.height / this.verticalFrames,
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				)
+			}
+			
 			this.tick++
 		}
 	}
@@ -48,6 +65,8 @@ class Zombie {
 		Object.values(movements).every((value) => !value)
 
 		if (this.isReady) {
+			this.leftDirection = playerX <= this.x
+
 			if (playerX <= this.x) {
 				const diffX = this.x - playerX
 

@@ -14,11 +14,18 @@ class BulletBoss {
 
 		this.xSpeed = 8 * xSpeed
 		this.ySpeed = 8 * ySpeed
+		
+		this.imgInverse = new Image ()
+		this.imgInverse.src = "./images/mocoInverso.png"
 	}
 
 	draw() {
 		if (this.isReady) {
-			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			if (this.xSpeed >= 0) {
+				this.ctx.drawImage(this.imgInverse, this.x, this.y, this.width, this.height)
+			} else {
+				this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+			}
 		}
 	}
 
