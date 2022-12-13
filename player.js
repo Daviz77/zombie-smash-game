@@ -24,6 +24,10 @@ class Player {
 			this.isReady = true
 		}
 		
+		this.imgInverse = new Image()
+		this.imgInverse.src = "./images/ZombieInverso.png"
+		this.leftDirection = true
+
 		this.movements = {
 			left: false,
 			right: false,
@@ -37,26 +41,42 @@ class Player {
 			const diff = this.height + this.y - 710
 			if (diff > 0) {
 				this.y = 710 - this.height
+			} 
+			if (this.leftDirection) {
+				this.ctx.drawImage(
+					this.imgInverse,
+					this.img.width / this.horizontalFrames * this.xFrame,
+					this.img.height / this.verticalFrames * this.yFrame,
+					this.img.width / this.horizontalFrames,
+					this.img.height / this.verticalFrames,
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				)
+			} else {
+				this.ctx.drawImage(
+					this.img,
+					this.img.width / this.horizontalFrames * this.xFrame,
+					this.img.height / this.verticalFrames * this.yFrame,
+					this.img.width / this.horizontalFrames,
+					this.img.height / this.verticalFrames,
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				)
 			}
-			this.ctx.drawImage(
-				this.img,
-				this.img.width / this.horizontalFrames * this.xFrame,
-				this.img.height / this.verticalFrames * this.yFrame,
-				this.img.width / this.horizontalFrames,
-				this.img.height / this.verticalFrames,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			)
 			this.bullets.forEach((bullet) => bullet.draw())
 			this.tick++;
 		}
 	}
 	move() {
 		if (this.movements.left) {
+			this.leftDirection = true
 			this.vx = -this.speed
 		} else if (this.movements.right) {
+			this.leftDirection = false
 			this.vx = this.speed
 		} else {
 			this.vx = 0

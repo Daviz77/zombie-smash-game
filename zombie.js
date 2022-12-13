@@ -30,7 +30,6 @@ class Zombie {
 			if (diff > 0) {
 				this.y = 710 - this.height
 			}
-			console.log(this.vx)
 			if (this.leftDirection) {
 				this.ctx.drawImage(
 					this.imgInverse,
