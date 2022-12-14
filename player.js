@@ -3,15 +3,15 @@ class Player {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
-		this.width = 60
-		this.height = 60
+		this.width = 80
+		this.height = 80
 		this.speed = 12
 		this.vx = 0
 		this.vy = 0
 		this.alive = 1
 		this.img = new Image()
 		this.bullets = []
-		this.img.src = "/images/zombie.png"
+		this.img.src = "./images/playerOk.png"
 		this.isReady = false
 		this.horizontalFrames = 3
 		this.verticalFrames = 1
@@ -25,7 +25,7 @@ class Player {
 		}
 		
 		this.imgInverse = new Image()
-		this.imgInverse.src = "./images/ZombieInverso.png"
+		this.imgInverse.src = "./images/playerInverse.png"
 		this.leftDirection = true
 
 		this.movements = {
@@ -121,7 +121,7 @@ class Player {
 
 		if (!this.isMoving) {
       this.yFrame = 0;
-      this.xFrame = 0;
+      this.xFrame = 2;
     }
 	}
 
@@ -162,8 +162,11 @@ class Player {
 		const clickedX = event.clientX - rect.left
 		const clickedY = event.clientY - rect.top
 
-		const normalizedX = this.x + this.width;
-		const normalizedY = this.y + 18;
+		let normalizedX = this.x;
+		if (!this.leftDirection) {
+			normalizedX += this.width;
+		}
+		const normalizedY = this.y + 47;
 
     function getAxisSpeeds(x1, y1, x2, y2, speed) {
       const distance = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);

@@ -9,9 +9,9 @@ class Boss {
 		this.lifes = lifes
 		this.bullets = []
 		this.img = new Image()
-		this.img.src = "./images/zombie.png"
+		this.img.src = "./images/ZombieBossInverse.png"
 		this.isReady = false
-		this.horizontalFrames = 3
+		this.horizontalFrames = 1
 		this.verticalFrames = 1
 		this.xFrame = 0
 		this.yFrame = 0
@@ -21,7 +21,7 @@ class Boss {
 			this.height = (this.width * this.img.height) / this.img.width
 		}
 		this.imgInverse = new Image()
-		this.imgInverse.src = "./images/ZombieInverso.png"
+		this.imgInverse.src = "./images/ZombieBoss.png"
 		this.leftDirection = true
 	
 	}
@@ -131,8 +131,12 @@ class Boss {
 		const bossX = this.x - rect.left
 		const bossy = this.y - rect.top
 
-		const normalizedY = this.y + 75
-		const normalizedX = this.x - 100
+		let normalizedX = this.x - 135
+		if (!this.leftDirection){
+			normalizedX += this.width - 45
+		}
+		const normalizedY = this.y + 85
+		
 
 		const diffX = playerX - bossX
 		const diffY = playerY - bossy
