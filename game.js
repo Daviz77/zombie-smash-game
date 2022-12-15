@@ -14,7 +14,7 @@ class Game {
 
 	start() {
 		this.started = true
-		const zombiesTotal = 0
+		const zombiesTotal = 50
 		let zombiesCounter = 0
 
 		this.intervalId = setInterval(() => {
@@ -45,7 +45,6 @@ class Game {
 	draw() {
 		this.bg.draw()
 		this.player.draw()
-		//this.obstacle.draw()
 		this.zombies.forEach((zombie) => {
 			zombie.draw()
 		})
@@ -163,7 +162,7 @@ class Game {
 			this.canvas.width / 2,
 			this.canvas.height / 2
 		)
-		setTimeout(() => location.reload(), 2000)
+		setTimeout(() => location.reload(), 1000)
 	}
 
 	youWin() {
