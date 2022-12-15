@@ -158,7 +158,7 @@ class Game {
 		this.ctx.font = "100px Comic Sans"
 		this.ctx.textAlign = "center"
 		this.ctx.fillText(
-			"Game Over",
+			"YOU DIE",
 			this.canvas.width / 2,
 			this.canvas.height / 2
 		)
@@ -172,7 +172,7 @@ class Game {
 		this.ctx.font = "80px Comic Sans"
 		this.ctx.textAlign = "center"
 		this.ctx.fillText(
-			"DONT FEEL GOOD, YOU SUCK BRO",
+			"GG",
 			this.canvas.width / 2,
 			this.canvas.height / 2
 		)
