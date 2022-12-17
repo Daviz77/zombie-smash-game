@@ -3,8 +3,8 @@ class Bullet {
 		this.ctx = ctx
 		this.x = x
 		this.y = y
-		this.height = 7
-		this.width = 7
+		this.height = 10
+		this.width = 10
 		this.img = new Image()
 		this.img.src = "./images/PngItem_709207.png"
 		this.isReady = false
